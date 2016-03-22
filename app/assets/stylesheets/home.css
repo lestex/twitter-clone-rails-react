@@ -1,0 +1,25 @@
+body{
+	padding: 1em;
+}
+
+time{
+	display: block;
+	color: #888;
+	font-size: 0.8em;
+}
+
+.collection li .tweet-li{
+	position: relative;
+}
+
+.collection li:hover .destroy {
+	display: block;
+}
+
+.collection li .destroy {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+	margin: 10px 0px;  
+}
