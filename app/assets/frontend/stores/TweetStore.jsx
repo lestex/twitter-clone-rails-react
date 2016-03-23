@@ -1,6 +1,7 @@
 import AppDispatcher from "../dispatcher";
 import ActionTypes from "../constants";
 import { EventEmitter } from "events";
+import findIndexByKeyValue from "../utils/utils";
 import moment from "moment";
 
 let _tweets = [];
@@ -27,6 +28,7 @@ class TweetEventEmitter extends EventEmitter {
 
 let TweetStore = new TweetEventEmitter();
 
+
 AppDispatcher.register( action => {
 	switch(action.actionType) {
 		case ActionTypes.RECEIVED_TWEETS:			
@@ -34,12 +36,18 @@ AppDispatcher.register( action => {
 			TweetStore.emitChange();
 			break;
 
-		case ActionTypes.RECEIVED_ONE_TWEET:
+		case ActionTypes.RECEIVED_ONE_TWEET:			
 			_tweets.unshift(action.rawTweet);			
+			TweetStore.emitChange();
+			break;
+			
+		case ActionTypes.DELETED_TWEET:
+			let index = findIndexByKeyValue(_tweets, "id", action.id);
+			_tweets.splice(index, 1);			
 			TweetStore.emitChange();
 
 		default:
-	}
+	}	
 });
 
 export default TweetStore;

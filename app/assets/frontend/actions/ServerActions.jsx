@@ -13,5 +13,12 @@ export default {
 			actionType: ActionTypes.RECEIVED_ONE_TWEET,
 			rawTweet
 		});
+		console.log(rawTweet);
+	},
+	deletedOneTweet(id){
+		AppDispatcher.dispatch({
+			actionType: ActionTypes.DELETED_TWEET,
+			id
+		});
 	}
 }

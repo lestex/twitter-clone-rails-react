@@ -6,5 +6,8 @@ export default {
 	},
 	sendTweet(body){
 		API.createTweet(body);
+	},
+	deleteTweet(id){		
+		API.deleteTweet(id);
 	}
 }

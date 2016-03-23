@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :followers do |r|
+    collection do
+      get 'random'
+    end
+  end
+
   resources :tweets
   devise_for :users  
   # The priority is based upon order of creation: first created -> highest priority.

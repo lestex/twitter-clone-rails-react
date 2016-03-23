@@ -10,5 +10,14 @@ export default {
 		$.post("/tweets", {body})
 		.success(rawTweet =>  ServerActions.receivedOneTweet(rawTweet))	
 		.error(error => console.log(error));
+	},
+	deleteTweet(id){		
+		$.ajax({
+			url: "/tweets/" + id,
+			method: 'DELETE'
+		})		
+		.success(id => ServerActions.deletedOneTweet(id))	
+		.error(error => console.log(error));
 	}
+
 }

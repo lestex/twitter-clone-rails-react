@@ -1,8 +1,9 @@
 import React from "react";
+import TweetActions from "../actions/TweetActions";
 
 export default class Tweet extends React.Component {
 	handleClick(e){
-		console.log(e.target);
+		TweetActions.deleteTweet(e);
 	}
 	render() {
 		return (
@@ -11,7 +12,7 @@ export default class Tweet extends React.Component {
 	      <span className="title">{this.props.name}</span>
 	      <time>{this.props.formattedDate}</time>
 	      <p>{this.props.body}</p>	      
-	      <a class="btn-floating btn waves-effect waves-light red destroy" onClick={this.handleClick} ><i class="material-icons">remove</i></a>
+	      <a class="btn-floating btn waves-effect waves-light red destroy" onClick={this.handleClick.bind(null, this.props.id)} ><i class="material-icons">remove</i></a>
 	    </li>
 		)
 	}

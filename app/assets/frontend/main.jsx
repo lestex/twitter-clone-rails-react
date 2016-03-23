@@ -1,47 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Router, Route, Link, browserHistory } from 'react-router';
+import Index from "./components/Index";
+import Follow from "./components/Follow";
 
-import TweetBox from "./components/tweetbox";
-import TweetList from "./components/tweetlist";
-import TweetStore from "./stores/TweetStore";
 
-import TweetActions from "./actions/TweetActions";
-TweetActions.getAllTweets();
 
-let getAppState = () => {	
-	return { tweetsList: TweetStore.getAll() };
-}
-
-class Main extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = getAppState();		
-		this._onChange = this._onChange.bind(this);
-	}
-
-	componentDidMount() {
-		TweetStore.addChangeListener(this._onChange);		
-	}
-
-	componentWillUnmount() {
-		TweetStore.removeChangeListener(this._onChange);
-	}
-
-	_onChange() {		
-		this.setState(getAppState());
-	}
-
+class App extends React.Component {
 	render() {
 		return (
-			<div className="container">
-				<TweetBox />
-				<TweetList tweets={this.state.tweetsList} />
-			</div> 
-			);
+			<div className="App">
+				<Link to="/index">Index</Link><br/>
+				<Link to="/follow">Follow</Link>
+				{this.props.children}
+			</div>
+		);
 	}
 }
 
 const app = document.getElementById("react");
 if (app){
-	ReactDOM.render(<Main />, app);	
+	ReactDOM.render((
+		<Router history={browserHistory}>
+		    <Route path="/" component={App}>
+		      <Route path="index" component={Index}/>
+		      <Route path="follow" component={Follow}/>
+		    </Route>
+		  </Router>
+		 
+		), app);	
 }
