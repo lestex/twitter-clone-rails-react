@@ -9,9 +9,7 @@ import Follow from "./components/Follow";
 class App extends React.Component {
 	render() {
 		return (
-			<div className="App">
-				<Link to="/index">Index</Link><br/>
-				<Link to="/follow">Follow</Link>
+			<div className="App">				
 				{this.props.children}
 			</div>
 		);
@@ -20,13 +18,12 @@ class App extends React.Component {
 
 const app = document.getElementById("react");
 if (app){
-	ReactDOM.render((
+	ReactDOM.render(
 		<Router history={browserHistory}>
-		    <Route path="/" component={App}>
-		      <Route path="index" component={Index}/>
+		    <Route component={App}>
+		      <Route path="/" component={Index}/>
 		      <Route path="follow" component={Follow}/>
 		    </Route>
-		  </Router>
-		 
-		), app);	
+		  </Router>		 
+		, app);	
 }

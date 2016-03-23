@@ -18,6 +18,16 @@ export default {
 		})		
 		.success(id => ServerActions.deletedOneTweet(id))	
 		.error(error => console.log(error));
+	},
+	getAllUsers() {		
+		$.get("/followers/random")
+		.success( rawUsers => ServerActions.receivedUsers(rawUsers) )
+		.error(error => console.log(error));
+	},
+	followUser(userId) {		
+		$.post("/followers", { user_id: userId })
+		.success( rawFollower => ServerActions.receivedOneFollower(rawFollower) )
+		.error(error => console.log(error));
 	}
 
 }

@@ -35,7 +35,9 @@ export default class Index extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<Link to="/follow">Who to follow</Link>
+				<div className="row">
+					<Link to="/follow">Who to follow</Link>
+				</div>
 				<TweetBox />
 				<TweetList tweets={this.state.tweetsList} />
 			</div> 
